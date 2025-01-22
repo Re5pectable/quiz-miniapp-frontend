@@ -1,28 +1,31 @@
 <template>
     <div>
-        <HeaderComponent :total="gameInfo.quiz.n_questions" :current="question?.order"/>
-        <h2>{{ question?.text }}</h2>
-        <div class="answers-list">
-            <div class="answer-container" v-for="answer in answers" :key="answer.id">
-                <div class="radio-container">
-                    <input type="radio" :id="answer.id" name="answer" v-model="selectedAnswerId" :value="answer.id"
-                        :disabled="answered" class="custom-radio"
-                        :class="{ 'wrong': selectedAnswerId === answer.id && !answer.correct && answered }">
-                    <label :for="answer.id"></label>
-                </div>
-                <div class="answer">
-                    <p @click="choose(answer.id)" :class="{
-                        'correct': answer.correct && answered,
-                        'wrong': selectedAnswerId === answer.id && !answer.correct && answered
-                    }">
-                        {{ answer.text }}
-                    </p>
-                    <p v-if="answer.note" class="answer-note">{{ answer.note }}</p>
+        <HeaderComponent :total="gameInfo.quiz.n_questions" :current="question?.order" />
+        <div class="pad">
+            <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
+            <h2>{{ question?.text }}</h2>
+            <div class="answers-list">
+                <div class="answer-container" v-for="answer in answers" :key="answer.id">
+                    <div class="radio-container">
+                        <input type="radio" :id="answer.id" name="answer" v-model="selectedAnswerId" :value="answer.id"
+                            :disabled="answered" class="custom-radio"
+                            :class="{ 'wrong': selectedAnswerId === answer.id && !answer.correct && answered }">
+                        <label :for="answer.id"></label>
+                    </div>
+                    <div class="answer">
+                        <p @click="choose(answer.id)" :class="{
+                            'correct': answer.correct && answered,
+                            'wrong': selectedAnswerId === answer.id && !answer.correct && answered
+                        }">
+                            {{ answer.text }}
+                        </p>
+                        <p v-if="answer.note" class="answer-note">{{ answer.note }}</p>
+                    </div>
                 </div>
             </div>
+            <button class="v" :disabled="!selectedAnswerId" @click="makeAnswer()" v-if="!answered">Ответить</button>
+            <button class="g" :disabled="!selectedAnswerId" @click="next()" v-else>Дальше</button>
         </div>
-        <button class="v" :disabled="!selectedAnswerId" @click="makeAnswer()" v-if="!answered">Ответить</button>
-        <button class="g" :disabled="!selectedAnswerId" @click="next()" v-else>Дальше</button>
     </div>
 </template>
 <script>
@@ -65,7 +68,7 @@ export default {
             this.answered = null;
             this.selectedAnswerId = null;
             this.question = null,
-            this.answers = [];
+                this.answers = [];
         },
         async next() {
             const data = await apiGameNext(this.gameId);
@@ -94,7 +97,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 h2 {
     margin-left: 2px;
     margin-bottom: 32px;
@@ -113,6 +116,13 @@ h2 {
     /* gap: 15px */
 }
 
+img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 32px;
+}
 .answer {
     display: flex;
     flex-direction: column;
@@ -148,7 +158,6 @@ h2 {
     width: 24px;
     height: 24px;
     margin-right: 15px;
-    /* margin-bottom: 10px; */
 }
 
 .custom-radio {

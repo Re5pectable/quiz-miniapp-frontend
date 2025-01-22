@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "StratosWeb";
+  src: URL("/fonts/Stratos-Semibold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "CommonsPro";
+  src: URL("/fonts/TT-Commons-Pro-Medium.ttf") format("truetype");
+}

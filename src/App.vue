@@ -16,19 +16,24 @@ export default {
 }
 </script>
 <style>
+
 body {
   margin: 0;
-  background-color: #191919;
+  background-color: black;
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-size: 42px;
   font-weight: 600;
-  letter-spacing: -2%;
-  line-height: 50.4px;
+  letter-spacing: -0.02em;
   text-align: left;
   color: white;
+  margin-block: 0;
+  font-family: "StratosWeb", sans-serif;
+  line-height: 120%;
 }
 
 h2 {
@@ -54,6 +59,7 @@ p {
   margin-block: 0;
   color: white;
   text-align: left;
+  line-height: 130%;
 }
 
 button {
@@ -64,7 +70,6 @@ button {
   font-size: 16px;
   color: white;
   font-weight: 500;
-  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -76,23 +81,29 @@ button.v:disabled {
   background-color: #D7DBEB;
   color: #BABFD1;
 }
+button.gr{
+  background-color: #353535
+}
 
 button.g {
   background-color: #19D429;
 }
 
 #app {
-  font-family: tt-commons-pro-thin, sans-serif;
+  font-family: "CommonsPro", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding: 10px 20px;
   display: flex;
   justify-content: center;
+  margin-bottom: 40px;
 }
 
 #content {
-  width: 700px;
+  max-width: 600px;
+}
+.pad{
+  padding: 0 20px;
 }
 </style>

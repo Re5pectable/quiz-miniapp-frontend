@@ -1,12 +1,13 @@
 <template>
     <div>
-        <HeaderComponent />
-        <div class="image-container">
-            <img :src="quiz?.logo_url" alt="Quiz Logo" />
+        <HeaderComponent :nonSolid="true"/>
+        <img :src="quiz?.logo_url" alt="Quiz Logo" />
+        <div class="pad">
+            <TagList :quiz="quiz"/>
+            <h1>{{ quiz?.header }}</h1>
+            <p>{{ quiz?.text }}</p>
+            <button @click="startGame()">Начать</button>
         </div>
-        <h1>{{ quiz?.header }}</h1>
-        <p class="description">{{ quiz?.text }}</p>
-        <button @click="startGame()">Начать</button>
     </div>
 
 </template>
@@ -14,6 +15,7 @@
 import HeaderComponent from './HeaderComponent.vue';
 import { apiGetQuiz } from '@/api/quiz';
 import { apiStartGame } from '@/api/game';
+import TagList from './TagList.vue';
 
 export default {
     props: {
@@ -22,7 +24,7 @@ export default {
             required: true,
         }
     },
-    components: { HeaderComponent },
+    components: { HeaderComponent, TagList },
     data() {
         return {
             quiz: null,
@@ -40,31 +42,27 @@ export default {
 }
 </script>
 <style scoped>
-.image-container {
-    position: relative;
-    width: 100%;
-}
-
 img {
-    max-height: 500px;
     width: 100%;
-    height: auto;
+    height: 500px;
     display: block;
     object-fit: cover;
+    margin-bottom: 24px;
 }
 
 h1 {
     color: white;
     text-align: left;
     margin: 0px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin-top: 12px;
+    margin-bottom: 24px;
 }
 
 p {
     text-align: left;
     color: white;
     margin: 0;
+    margin-bottom: 48px;
 }
 
 button {

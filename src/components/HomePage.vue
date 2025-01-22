@@ -1,15 +1,12 @@
 <template>
     <div>
-        <HeaderComponent :hideMore="true"/>
-        <div class="quiz-list">
+        <HeaderComponent :hideMore="true" />
+        <div class="quiz-list pad">
             <div v-for="quiz in quizList" class="quiz-wrapper" :key="quiz.id" @click="$router.push(`/quiz/${quiz.id}`)">
                 <img class="quiz-logo" :src="quiz.logo_url">
                 <div class="quiz-info">
-                    <h1 class="quiz-header">{{ quiz.header }}</h1>
-                    <div class="quiz-tags-list">
-                        <div class="quiz-tag type">Викторина</div>
-                        <div class="quiz-tag category">Искусство</div>
-                    </div>
+                    <TagList :quiz="quiz" />
+                    <h3>{{ quiz.header }}</h3>
                 </div>
             </div>
         </div>
@@ -18,10 +15,12 @@
 
 <script>
 import HeaderComponent from './HeaderComponent.vue';
+import TagList from './TagList.vue';
 import { apiGetQuizList } from '@/api/quiz';
 
+
 export default {
-    components: { HeaderComponent },
+    components: { HeaderComponent, TagList },
     data() {
         return {
             quizList: [],
@@ -34,34 +33,18 @@ export default {
 };
 </script>
 <style scoped>
-.quiz-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-h1 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 24px;
-    color: white;
-}
 
 .quiz-wrapper {
-    background-color: #282828;
-    border-radius: 20px;
-    padding: 15px;
-    gap: 20px;
-    display: flex;
-    cursor: pointer;
+    padding: 12px 0;
 }
 
 .quiz-logo {
-    width: 120px;
-    height: 120px;
+    width: 100%;
+    height: 240px;
     background-color: red;
     border-radius: 8px;
     object-fit: cover;
+    margin-bottom: 16px;
 }
 
 .quiz-info {
@@ -69,7 +52,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 2px 0px;
+    gap: 12px;
 }
 
 .quiz-tags-list {
@@ -81,7 +64,7 @@ h1 {
     font-size: 14px;
     padding: 6px 13px;
     border-radius: 20px;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px solid rgb(172, 172, 172);
     color: rgb(194, 194, 194);
 }

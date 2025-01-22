@@ -1,7 +1,7 @@
 <template>
-    <div class="header">
+    <div class="header pad" :class="{'non-solid': nonSolid}">
         <div v-if="!hideMore" class="more-btn" @click="$router.push('/')"></div>
-        <img src="/img/logo-small.png" class="logo">
+        <img src="/img/Logo_Dark.png" class="logo">
         <span class="question-counter" v-if="current">{{ current }} / {{ total }}</span>
     </div>
 </template>
@@ -17,7 +17,11 @@ export default {
         hideMore: {
             type: Boolean,
             default: false,
-        }
+        },
+        nonSolid: {
+            type: Boolean,
+            default: false,
+        },
     }
 }
 </script>
@@ -27,8 +31,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 72px;
-    margin-bottom: 10px;
     position: relative;
+    z-index: 100;
 }
 
 img {
@@ -54,5 +58,8 @@ img {
     font-size: 18px;
     border-radius: 40px;
     font-style: monospace;
+}
+.header.non-solid{
+    margin-bottom: -72px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="quiz">
         <HeaderComponent :nonSolid="true"/>
         <img :src="quiz?.logo_url" alt="Quiz Logo" />
         <div class="pad">

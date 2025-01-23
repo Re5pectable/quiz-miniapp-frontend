@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="gameInfo">
         <HeaderComponent :nonSolid="true" />
         <img :src="result?.pic_url">
         <div class="result pad">
@@ -9,7 +9,7 @@
                 <p>{{ result?.text }}</p>
             </div>
             <div class="tools">
-                <button class="v">Поделиться</button>
+                <button class="v" src="https://t.me/share/url?url=https://t.me/KleyQuizTestBot?profile&text=Гениальный тест">Поделиться</button>
                 <div class="extra-tools">
                     <button class="gr" @click="$router.push('/')">Все тесты</button>
                     <button class="gr" @click="$router.push(`/quiz/${gameInfo.quiz.id}`)">Заново</button>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="gameInfo">
         <HeaderComponent :total="gameInfo.quiz.n_questions" :current="question?.order" />
         <div class="question-container pad">
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">

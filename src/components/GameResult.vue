@@ -9,7 +9,7 @@
                 <p>{{ result?.text }}</p>
             </div>
             <div class="tools">
-                <button class="v" src="https://t.me/share/url?url=https://t.me/KleyQuizTestBot?profile&text=Гениальный тест">Поделиться</button>
+                <button class="v" @click="share">Поделиться</button>
                 <div class="extra-tools">
                     <button class="gr" @click="$router.push('/')">Все тесты</button>
                     <button class="gr" @click="$router.push(`/quiz/${gameInfo.quiz.id}`)">Заново</button>
@@ -43,6 +43,16 @@ export default {
         }
         this.result = await apiGetResult(this.gameId)
     },
+    methods: {
+        async share() {
+            const shareData = {
+                title: `Тест "${this.gameInfo.quiz.header}"`,
+                text: `Я прошел тест "${this.gameInfo.quiz.header}" и тебе советую!`,
+                url: `https://quiz.kley.media/quiz/${this.gameInfo.quiz.id}`,
+            };
+            await navigator.share(shareData);
+        }
+    }
 
 }
 </script>
@@ -76,13 +86,15 @@ img {
     width: 100%;
     margin-bottom: 48px;
 }
-.tools{
+
+.tools {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-.extra-tools{
+
+.extra-tools {
     display: flex;
     gap: 12px;
 }

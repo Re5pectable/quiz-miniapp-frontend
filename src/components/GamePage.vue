@@ -1,7 +1,7 @@
 <template>
     <div>
         <HeaderComponent :total="gameInfo.quiz.n_questions" :current="question?.order" />
-        <div class="pad">
+        <div class="question-container pad">
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
             <h2>{{ question?.text }}</h2>
             <div class="answers-list">
@@ -107,7 +107,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin-bottom: 32px;
+    margin-bottom: 48px;
 }
 
 .answer-container {
@@ -118,7 +118,7 @@ h2 {
 
 img{
     width: 100%;
-    height: auto;
+    height: 240px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 32px;
@@ -195,5 +195,8 @@ img{
 
 .custom-radio.wrong:checked+label::after {
     background-color: #F21423;
+}
+.question-container{
+    margin-top: 20px;
 }
 </style>

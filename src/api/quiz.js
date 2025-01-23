@@ -6,6 +6,6 @@ export async function apiGetQuizList() {
 }
 
 export async function apiGetQuiz(id) {
-  const { data } = await apiClient.get("quiz/", {params: {id: id}});
+  const { data } = await apiClient.get("quiz", {params: {id: id}});
   return data;
 }

@@ -35,7 +35,7 @@ export default {
 <style scoped>
 
 .quiz-wrapper {
-    padding: 12px 0;
+    padding: 16px 0;
 }
 
 .quiz-logo {

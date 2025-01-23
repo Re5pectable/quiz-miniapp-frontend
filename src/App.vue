@@ -11,7 +11,8 @@ import { apiInitSession } from './api/session';
 export default {
   name: 'App',
   async mounted() {
-    await apiInitSession({});
+    const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user
+    await apiInitSession({userData});
   }
 }
 </script>

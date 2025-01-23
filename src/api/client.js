@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "https://quiz.kley.media/api",
+  baseURL: "https://api.quiz.kley.media/",
   withCredentials: true,
 });

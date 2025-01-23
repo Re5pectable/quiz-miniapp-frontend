@@ -12,6 +12,7 @@ export default {
   name: 'App',
   async mounted() {
     const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user
+    console.log(window?.Telegram?.WebApp?)
     await apiInitSession({userData});
   }
 }
@@ -28,7 +29,7 @@ h2,
 h3,
 h4 {
   font-size: 42px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   text-align: left;
   color: white;
@@ -40,17 +41,14 @@ h4 {
 h2 {
   line-height: 43.2px;
   font-size: 36px;
-  font-weight: 800;
 }
 
 h3 {
   font-size: 32px;
-  font-weight: 800;
 }
 
 h4 {
   font-size: 28px;
-  font-weight: 800;
 }
 
 p {
@@ -79,8 +77,8 @@ button.v {
 }
 
 button.v:disabled {
-  background-color: #D7DBEB;
-  color: #BABFD1;
+  background-color: #353535;
+  color: #797C84;
 }
 button.gr{
   background-color: #353535
@@ -106,5 +104,17 @@ button.g {
 }
 .pad{
   padding: 0 20px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+body {
+  -ms-overflow-style:none;
 }
 </style>

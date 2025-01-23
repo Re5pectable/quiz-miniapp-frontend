@@ -6,7 +6,7 @@
             <TagList :quiz="quiz"/>
             <h1>{{ quiz?.header }}</h1>
             <p>{{ quiz?.text }}</p>
-            <button @click="startGame()">Начать</button>
+            <button class="g" @click="startGame()">Начать</button>
         </div>
     </div>
 
@@ -63,9 +63,5 @@ p {
     color: white;
     margin: 0;
     margin-bottom: 48px;
-}
-
-button {
-    background-color: #758BFD;
 }
 </style>

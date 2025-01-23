@@ -12,7 +12,7 @@ export default {
   name: 'App',
   async mounted() {
     const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user
-    console.log(window?.Telegram?.WebApp?)
+    console.log(window?.Telegram?.WebApp);
     await apiInitSession({userData});
   }
 }

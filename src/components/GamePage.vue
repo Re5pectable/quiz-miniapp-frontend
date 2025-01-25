@@ -67,8 +67,12 @@ export default {
         clear() {
             this.answered = null;
             this.selectedAnswerId = null;
-            this.question = null,
-                this.answers = [];
+            this.question = null;
+            this.answers = [];
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         },
         async next() {
             const data = await apiGameNext(this.gameId);
@@ -116,13 +120,15 @@ h2 {
     /* gap: 15px */
 }
 
-img{
+img {
     width: 100%;
     height: 240px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 32px;
+    pointer-events: none; 
 }
+
 .answer {
     display: flex;
     flex-direction: column;
@@ -196,7 +202,16 @@ img{
 .custom-radio.wrong:checked+label::after {
     background-color: #F21423;
 }
-.question-container{
+
+.question-container {
     margin-top: 20px;
+    pointer-events: none; 
+    user-select: none;
+    /* Отключает выделение текста */
+    -webkit-user-select: none;
+    /* Для Safari */
+    -moz-user-select: none;
+    /* Для Firefox */
+    -ms-user-select: none;
 }
 </style>

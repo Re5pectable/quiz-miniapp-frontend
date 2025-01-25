@@ -2,7 +2,7 @@
     <div class="header pad" :class="{'non-solid': nonSolid}">
         <div v-if="!hideMore" class="more-btn" @click="$router.push('/')"></div>
         <img src="/img/Logo_Dark.png" class="logo">
-        <span class="question-counter" v-if="current">{{ current }} / {{ total }}</span>
+        <span class="question-counter" v-if="current">{{ current }}/{{ total }}</span>
     </div>
 </template>
 <script>
@@ -57,7 +57,8 @@ img {
     color: white;
     font-size: 18px;
     border-radius: 40px;
-    font-style: monospace;
+    font-stretch: condensed;
+    font-feature-settings: 'tnum' on, 'lnum' on;
 }
 .header.non-solid{
     margin-bottom: -72px;

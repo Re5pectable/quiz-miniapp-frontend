@@ -176,10 +176,8 @@ img {
     width: 24px;
     height: 24px;
     background-color: #333;
-    /* Темно-серый цвет для внешнего круга */
     border-radius: 50%;
     border: 2px solid #666;
-    /* Обводка */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -195,7 +193,6 @@ img {
     width: 12px;
     height: 12px;
     background-color: #758BFD;
-    /* Красный цвет внутреннего круга */
     border-radius: 50%;
 }
 
@@ -205,13 +202,10 @@ img {
 
 .question-container {
     margin-top: 20px;
-    pointer-events: none; 
+    /* pointer-events: none;  */
     user-select: none;
-    /* Отключает выделение текста */
     -webkit-user-select: none;
-    /* Для Safari */
     -moz-user-select: none;
-    /* Для Firefox */
     -ms-user-select: none;
 }
 </style>

@@ -43,7 +43,7 @@ img {
     transform: translateX(-50%);
 }
 .more-btn{
-    background-image: url("/public/img/more.svg");
+    background-image: url("/public/img/more_dark.svg");
     background-repeat: no-repeat;
     background-position: center;
     width: 20px;

@@ -24,8 +24,8 @@
                     </div>
                 </div>
             </div>
-            <button class="v" :disabled="!selectedAnswerId" @click="makeAnswer()" v-if="!answered">Ответить</button>
-            <button class="g" :disabled="!selectedAnswerId" @click="next()" v-else>Дальше</button>
+            <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()" v-if="!answered">Ответить</button>
+            <button class="g" :disabled="!selectedAnswerId || requesting" @click="next()" v-else>Дальше</button>
         </div>
     </div>
 </template>
@@ -52,6 +52,8 @@ export default {
             selectedAnswerId: null,
             answered: null,
             order: null,
+
+            requesting: null,
         }
     },
     async mounted() {
@@ -74,19 +76,22 @@ export default {
             this.answers = [];
         },
         async next() {
-            this.clear()
-
+            this.requesting = true;
             const data = await apiGameNext(this.gameId);
             if (data.is_finished) {
                 this.$router.push(`/game/${this.gameId}/result`)
                 return
             }
-            
+            this.requesting = false;
+
+            this.clear()
+
             this.question = data.question;
             this.answers = data.answers
             this.order = data.question.order;
         },
         async makeAnswer() {
+            this.requesting = true;
             const data = await apiMakeAnswer(this.gameId, this.selectedAnswerId);
 
             this.answers.forEach(answer => {
@@ -98,6 +103,7 @@ export default {
                 }
             });
             this.answered = true;
+            this.requesting = false;
         },
     }
 }

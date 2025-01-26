@@ -27,6 +27,18 @@ import { apiGetGame, apiGetResult } from '@/api/game';
 import QuestionLoader from './QuestionLoader.vue';
 
 export default {
+    metaInfo() {
+        return {
+            title: 'Название страницы',
+            meta: [
+                { property: 'og:title', content: this.gameInfo.quiz.header },
+                { property: 'og:description', content: 'Описание страницы' },
+                { property: 'og:image', content: 'https://example.com/your-image.jpg' },
+                { property: 'og:url', content: 'https://example.com/your-page' },
+                { property: 'og:type', content: 'website' },
+            ],
+        }
+    },
     components: { HeaderComponent, QuestionLoader },
     props: {
         gameId: {

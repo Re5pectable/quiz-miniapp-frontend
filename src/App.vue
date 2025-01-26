@@ -87,6 +87,9 @@ button.gr{
 button.g {
   background-color: #19D429;
 }
+button.g:disabled {
+  background-color: #bcffc1;
+}
 
 #app {
   font-family: "CommonsPro", serif;

@@ -1,7 +1,8 @@
 <template>
-    <div v-if="gameInfo">
-        <HeaderComponent :total="gameInfo.quiz.n_questions" :current="question?.order" />
-        <div class="question-container pad">
+    <div>
+        <HeaderComponent :total="gameInfo.quiz.n_questions" :current="order" />
+        <QuestionLoader v-if="!question"/>
+        <div class="question-container pad" v-else>
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
             <h2>{{ question?.text }}</h2>
             <div class="answers-list">
@@ -31,6 +32,7 @@
 <script>
 import { apiGetGame, apiGameNext, apiMakeAnswer } from '@/api/game';
 import HeaderComponent from './HeaderComponent.vue';
+import QuestionLoader from './QuestionLoader.vue';
 
 export default {
     props: {
@@ -39,7 +41,7 @@ export default {
             required: true
         }
     },
-    components: { HeaderComponent },
+    components: { HeaderComponent, QuestionLoader },
     data() {
         return {
             gameInfo: null,
@@ -49,6 +51,7 @@ export default {
 
             selectedAnswerId: null,
             answered: null,
+            order: null,
         }
     },
     async mounted() {
@@ -69,21 +72,19 @@ export default {
             this.selectedAnswerId = null;
             this.question = null;
             this.answers = [];
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         },
         async next() {
+            this.clear()
+
             const data = await apiGameNext(this.gameId);
             if (data.is_finished) {
                 this.$router.push(`/game/${this.gameId}/result`)
                 return
             }
-
-            this.clear()
+            
             this.question = data.question;
             this.answers = data.answers
+            this.order = data.question.order;
         },
         async makeAnswer() {
             const data = await apiMakeAnswer(this.gameId, this.selectedAnswerId);
@@ -126,7 +127,7 @@ img {
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 32px;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .answer {

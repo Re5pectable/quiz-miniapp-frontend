@@ -1,18 +1,21 @@
 <template>
-    <div v-if="gameInfo">
-        <HeaderComponent :nonSolid="true" />
-        <img :src="result?.pic_url">
-        <div class="result pad">
-            <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
-            <h3>Вы {{ result?.header }}</h3>
-            <div class="result-text">
-                <p>{{ result?.text }}</p>
-            </div>
-            <div class="tools">
-                <button class="v" @click="share">Поделиться</button>
-                <div class="extra-tools">
-                    <button class="gr" @click="$router.push('/')">Все тесты</button>
-                    <button class="gr" @click="$router.push(`/quiz/${gameInfo.quiz.id}`)">Заново</button>
+    <div>
+        <QuestionLoader v-if="!result" />
+        <div v-else>
+            <HeaderComponent :nonSolid="true" />
+            <img :src="result?.pic_url">
+            <div class="result pad">
+                <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
+                <h3>Вы {{ result?.header }}</h3>
+                <div class="result-text">
+                    <p>{{ result?.text }}</p>
+                </div>
+                <div class="tools">
+                    <button class="v" @click="share">Поделиться</button>
+                    <div class="extra-tools">
+                        <button class="gr" @click="$router.push('/')">Все тесты</button>
+                        <button class="gr" @click="$router.push(`/quiz/${gameInfo.quiz.id}`)">Заново</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,9 +24,10 @@
 <script>
 import HeaderComponent from './HeaderComponent.vue';
 import { apiGetGame, apiGetResult } from '@/api/game';
+import QuestionLoader from './QuestionLoader.vue';
 
 export default {
-    components: { HeaderComponent },
+    components: { HeaderComponent, QuestionLoader },
     props: {
         gameId: {
             type: String,

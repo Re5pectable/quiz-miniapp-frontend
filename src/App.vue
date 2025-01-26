@@ -100,7 +100,7 @@ button.g {
 }
 
 #content {
-  max-width: 600px;
+  width: 600px;
 }
 .pad{
   padding: 0 20px;

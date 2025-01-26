@@ -31,7 +31,7 @@ export default {
         return {
             title: 'Название страницы',
             meta: [
-                { property: 'og:title', content: this.gameInfo.quiz.header },
+                { property: 'og:title', content: this.gameInfo?.quiz?.header },
                 { property: 'og:description', content: 'Описание страницы' },
                 { property: 'og:image', content: 'https://example.com/your-image.jpg' },
                 { property: 'og:url', content: 'https://example.com/your-page' },

@@ -10,19 +10,30 @@
 import { apiInitSession } from './api/session';
 export default {
   name: 'App',
+  data() {
+    return {
+      tg: null,
+    }
+  },
   async mounted() {
-    const tg = window?.Telegram?.WebApp;
-    const userData = tg.initDataUnsafe?.user
-    console.log(tg);
-    tg.setHeaderColor("#000000");
-    tg.setBackgroundColor("#000000");
-    tg.setBottomBarColor("#000000");
-    await apiInitSession({userData});
-  }
+    this.tg = window?.Telegram?.WebApp;
+    await this.init();
+  },
+  methods: {
+    async init() {
+      if (this.tg) {
+        this.tg.setHeaderColor("#000000");
+        this.tg.setBackgroundColor("#000000");
+        this.tg.setBottomBarColor("#000000");
+      }
+      console.log(this.tg)
+      const userData = this.tg?.initDataUnsafe?.user
+      await apiInitSession({ userData });
+    }
+  },
 }
 </script>
 <style>
-
 body {
   margin: 0;
   background-color: black;
@@ -84,13 +95,15 @@ button.v:disabled {
   background-color: #353535;
   color: #797C84;
 }
-button.gr{
+
+button.gr {
   background-color: #353535
 }
 
 button.g {
   background-color: #19D429;
 }
+
 button.g:disabled {
   background-color: #bcffc1;
 }
@@ -109,7 +122,8 @@ button.g:disabled {
 #content {
   width: 600px;
 }
-.pad{
+
+.pad {
   padding: 0 20px;
 }
 
@@ -122,6 +136,6 @@ button.g:disabled {
 }
 
 body {
-  -ms-overflow-style:none;
+  -ms-overflow-style: none;
 }
 </style>

@@ -34,7 +34,7 @@ export default {
                 { property: 'og:title', content: this.gameInfo?.quiz?.header },
                 { property: 'og:description', content: 'Описание страницы' },
                 { property: 'og:image', content: 'https://example.com/your-image.jpg' },
-                { property: 'og:url', content: 'https://example.com/your-page' },
+                { property: 'og:url', content: window.location.href },
                 { property: 'og:type', content: 'website' },
             ],
         }
@@ -58,6 +58,9 @@ export default {
             return
         }
         this.result = await apiGetResult(this.gameId)
+        this.$nextTick(() => {
+            this.$meta().refresh();
+        });
     },
     methods: {
         async share() {

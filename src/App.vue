@@ -11,8 +11,12 @@ import { apiInitSession } from './api/session';
 export default {
   name: 'App',
   async mounted() {
-    const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user
-    console.log(window?.Telegram?.WebApp);
+    const tg = window?.Telegram?.WebApp;
+    const userData = tg.initDataUnsafe?.user
+    console.log(tg);
+    tg.setHeaderColor("#000000");
+    tg.setBackgroundColor("#000000");
+    tg.setBottomBarColor("#000000");
     await apiInitSession({userData});
   }
 }

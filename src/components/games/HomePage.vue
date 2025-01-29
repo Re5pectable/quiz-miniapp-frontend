@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <WrapperComponent>
         <HeaderComponent :hideMore="true" />
         <div class="quiz-list pad">
             <div v-for="quiz in quizList" class="quiz-wrapper" :key="quiz.id" @click="$router.push(`/quiz/${quiz.id}`)">
@@ -10,17 +10,18 @@
                 </div>
             </div>
         </div>
-    </div>
+    </WrapperComponent>
 </template>
 
 <script>
-import HeaderComponent from './HeaderComponent.vue';
-import TagList from './TagList.vue';
+import WrapperComponent from './_Wrapper.vue';
+import HeaderComponent from './_Header.vue';
+import TagList from './_TagList.vue';
 import { apiGetQuizList } from '@/api/quiz';
 
 
 export default {
-    components: { HeaderComponent, TagList },
+    components: { HeaderComponent, TagList, WrapperComponent },
     data() {
         return {
             quizList: [],
@@ -33,7 +34,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .quiz-wrapper {
     padding: 16px 0;
 }

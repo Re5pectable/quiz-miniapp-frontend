@@ -1,5 +1,5 @@
 <template>
-    <div v-if="quiz">
+    <WrapperComponent v-if="quiz">
         <HeaderComponent :nonSolid="true"/>
         <img :src="quiz?.logo_url" alt="Quiz Logo" />
         <div class="pad">
@@ -8,14 +8,15 @@
             <p>{{ quiz?.text }}</p>
             <button class="g" @click="startGame()">Начать</button>
         </div>
-    </div>
+    </WrapperComponent>
 
 </template>
 <script>
-import HeaderComponent from './HeaderComponent.vue';
+import HeaderComponent from './_Header.vue';
+import WrapperComponent from './_Wrapper.vue';
 import { apiGetQuiz } from '@/api/quiz';
 import { apiStartGame } from '@/api/game';
-import TagList from './TagList.vue';
+import TagList from './_TagList.vue';
 
 export default {
     props: {
@@ -24,7 +25,7 @@ export default {
             required: true,
         }
     },
-    components: { HeaderComponent, TagList },
+    components: { HeaderComponent, TagList, WrapperComponent },
     data() {
         return {
             quiz: null,

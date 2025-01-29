@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <WrapperComponent>
         <QuestionLoader v-if="!result" />
         <div v-else>
             <HeaderComponent :nonSolid="true" />
@@ -19,12 +19,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </WrapperComponent>
 </template>
 <script>
-import HeaderComponent from './HeaderComponent.vue';
+import HeaderComponent from './_Header.vue';
 import { apiGetGame, apiGetResult } from '@/api/game';
-import QuestionLoader from './QuestionLoader.vue';
+import QuestionLoader from './_Loader.vue';
+import WrapperComponent from './_Wrapper.vue';
 
 export default {
     metaInfo() {
@@ -39,7 +40,7 @@ export default {
             ],
         }
     },
-    components: { HeaderComponent, QuestionLoader },
+    components: { HeaderComponent, QuestionLoader, WrapperComponent },
     props: {
         gameId: {
             type: String,

@@ -1,7 +1,7 @@
 import { apiClient } from "./client";
 
 export async function apiGetQuizList() {
-  const { data } = await apiClient.get("quiz/preview");
+  const { data } = await apiClient.get("quiz/all");
   return data;
 }
 

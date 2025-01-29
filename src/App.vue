@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="content">
-      <router-view></router-view>
-    </div>
-
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -76,7 +73,9 @@ p {
   line-height: 130%;
 }
 
-button {
+button,
+input,
+select, textarea {
   border: none;
   border-radius: 12px;
   padding: 15px;
@@ -84,6 +83,12 @@ button {
   font-size: 16px;
   color: white;
   font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+input, select, textarea {
+  color: black;
   cursor: pointer;
 }
 
@@ -112,15 +117,6 @@ button.g:disabled {
   font-family: "CommonsPro", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-#content {
-  width: 600px;
 }
 
 .pad {

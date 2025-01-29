@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <WrapperComponent>
         <HeaderComponent :total="gameInfo.quiz.n_questions" :current="order" />
         <QuestionLoader v-if="!question"/>
         <div class="question-container pad" v-else>
@@ -27,12 +27,13 @@
             <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()" v-if="!answered">Ответить</button>
             <button class="g" :disabled="!selectedAnswerId || requesting" @click="next()" v-else>Дальше</button>
         </div>
-    </div>
+    </WrapperComponent>
 </template>
 <script>
 import { apiGetGame, apiGameNext, apiMakeAnswer } from '@/api/game';
-import HeaderComponent from './HeaderComponent.vue';
-import QuestionLoader from './QuestionLoader.vue';
+import HeaderComponent from './_Header.vue';
+import QuestionLoader from './_Loader.vue';
+import WrapperComponent from './_Wrapper.vue';
 
 export default {
     props: {
@@ -41,7 +42,7 @@ export default {
             required: true
         }
     },
-    components: { HeaderComponent, QuestionLoader },
+    components: { HeaderComponent, QuestionLoader, WrapperComponent },
     data() {
         return {
             gameInfo: null,

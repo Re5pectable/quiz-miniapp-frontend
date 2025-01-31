@@ -2,7 +2,9 @@
     <AdminPageWrapper v-if="quiz" class="quiz-config-page">
         <div class="back-btn">
             <button class="v small" @click="$router.push('/admin/quizes')">Назад</button>
+            <h1>Редактирование квиза</h1>
         </div>
+        <div class="devider"></div>
         <div class="quiz-config">
             <div class="quiz-manage-btn">
                 <div class="delete-btn">
@@ -54,29 +56,70 @@
                         @change="(event) => { newLogo = event.target.files[0]; changed = true }" />
                 </div>
             </div>
-        
+        </div>
         <div class="devider"></div>
-        <div class="add-question">
-            <button class="v small" @click="isAddingQuestion=true">Создать вопрос</button>
-            <div>
-                
+        <h2>Результаты</h2>
+        <div>
+            <div class="add-question-btn">
+                <button class="v small" @click="isAddingResult = true">Создать вопрос</button>
+                <button class="gr small" v-if="isAddingResult" @click="isAddingResult = false">Закрыть</button>
+            </div>
+            <div v-if="isAddingResult" class="add-question-config">
+                <div class="quiz-field">
+                    <p>Заголовок</p>
+                    <input v-model="newQuestion.header">
+                </div>
+                <div class="quiz-field">
+                    <p>Текст</p>
+                    <input v-model="newQuestion.text">
+                </div>
+                <div class="quiz-field">
+                    <p>Нужно очков</p>
+                    <input type="number" v-model.number="newQuestion.points">
+                </div>
+                <div class="quiz-field">
+                    <p>Обложка</p>
+                    <input type="file" accept="image/png, image/jpeg, image/jpg"
+                        @change="(event) => { newResultPic = event.target.files[0] }" />
+                </div>
             </div>
         </div>
-        
+        <div class="devider"></div>
+        <h2>Вопросы</h2>
+        <div>
+            <div class="add-question-btn">
+                <button class="v small" @click="isAddingQuestion = true">Создать вопрос</button>
+                <button class="gr small" v-if="isAddingQuestion" @click="isAddingQuestion = false">Закрыть</button>
+            </div>
+            <div v-if="isAddingQuestion" class="add-question-config">
+                <div class="quiz-field">
+                    <p>Текст</p>
+                    <input v-model="newQuestion.text">
+                </div>
+                <div class="quiz-field">
+                    <p>Номер</p>
+                    <input type="number" v-model.number="newQuestion.order">
+                </div>
+                <div class="quiz-field">
+                    <p>Обложка</p>
+                    <input type="file" accept="image/png, image/jpeg, image/jpg"
+                        @change="(event) => { newQuestionPic = event.target.files[0] }" />
+                </div>
+                <button class="g small" @click="createQuestion()">Создать</button>
+            </div>
+        </div>
         <div class="question-list">
-            <p>{{ questions }}</p>
-            <div class="question-row" v-for="question in questions" :key="question.id">
-                <p>{{ question.header }}</p>
-                <p>{{ question.note }}</p>
-                <p>{{ question.points }}</p>
+            <div class="question-row" v-for="question in questions" :key="question.id" @click="$router.push(`/admin/questions/${question.id}`)">
+                <img :src="question.pic_url">
+                <p>{{ question.text }}</p>
+                <p>{{ question.order }}</p>
             </div>
         </div>
-    </div>
     </AdminPageWrapper>
 </template>
 <script>
-import { getQuestions } from '@/api/admin/questions';
-import { getQuiz, updateQuiz, deleteQuiz } from '@/api/admin/quiz'
+import { apiGetQuestions, apiCreateQuestion } from '@/api/admin/questions';
+import { apiGetQuiz, apiUpdateQuiz, apiDeleteQuiz } from '@/api/admin/quiz'
 import AdminPageWrapper from './_Wrapper.vue';
 
 export default {
@@ -89,7 +132,7 @@ export default {
     components: { AdminPageWrapper },
     data() {
         return {
-            deleteQuiz,
+            deleteQuiz: apiDeleteQuiz,
             quiz: null,
             questions: null,
 
@@ -100,22 +143,38 @@ export default {
             sureDelete: false,
 
             isAddingQuestion: false,
+            isAddingResult: false,
+
+            newQuestion: { quiz_id: this.quizId, order: 1 },
+            newQuestionPic: null,
+
+            newResult: { quiz_id: this.quizId},
+            newResultPic: null,
         }
     },
     methods: {
         async update() {
-            await updateQuiz(this.quiz, this.newLogo)
+            await apiUpdateQuiz(this.quiz, this.newLogo)
             location.reload()
         },
         async deleteFunc() {
-            await deleteQuiz(this.quizId)
+            await apiDeleteQuiz(this.quizId)
             this.$router.push("/admin/quizes")
+        },
+        async createQuestion() {
+            try {
+                await apiCreateQuestion(this.newQuestion, this.newQuestionPic)
+                location.reload()    
+            } catch (error) {
+                alert(error.response.data.detail[0].msg)
+            }
+            
         },
     },
     async mounted() {
-        this.quiz = await getQuiz(this.quizId)
+        this.quiz = await apiGetQuiz(this.quizId)
         this.copiedData = { ...this.quiz }
-        this.questions = await getQuestions(this.quizId)
+        this.questions = await apiGetQuestions(this.quizId)
     },
     watch: {
         quiz: {
@@ -128,8 +187,13 @@ export default {
 }
 </script>
 <style scoped>
+h2{
+    margin-bottom: 20px;
+}
 .back-btn {
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .quiz-manage-btn {
@@ -162,7 +226,8 @@ export default {
     min-width: 500px;
     max-width: 1000px;
 }
-.quiz-config{
+
+.quiz-config {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -200,13 +265,58 @@ button.r {
 .delete-btn>button {
     width: 200px;
 }
-
-.question-list>button {
-    width: 200px;
+.question-list{
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
 }
-.devider{
+
+.devider {
     width: 100%;
     height: 1px;
     background-color: white;
+    margin: 30px 0;
+}
+
+.add-question-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    
+}
+.add-question-config{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid white;
+    border-radius: 15px;
+}
+.add-question-config > button{
+    width: 150px !important;
+}
+.question-row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    padding: 15px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.question-row > :nth-child(1){
+    width: 50px !important;
+    margin-right: 20px;
+}
+.question-row > :nth-child(2){
+    width: 450px;
+    margin-right: 120px;
+}
+
+
+.question-row:hover{
+    background-color: gray;
 }
 </style>

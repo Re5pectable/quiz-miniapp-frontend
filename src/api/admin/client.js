@@ -23,7 +23,7 @@ apiClient.interceptors.response.use(
     async (error) => {
         if (error.response.status === 401) {
             try {
-                const { data } = await apiClient.post("/auth/new-access-token");
+                const { data } = await apiClient.post("/auth/new-access-token", {}, {withCredentials: true});
 
                 apiClient.defaults.headers.common["Authorization"] = `Bearer ${data.access_token}`;
                 error.config.headers["Authorization"] = `Bearer ${data.access_token}`;

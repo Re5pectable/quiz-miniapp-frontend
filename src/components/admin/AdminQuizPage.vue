@@ -1,10 +1,16 @@
 <template>
-    <AdminPageWrapper v-if="quiz">
-        <div class="top">
-            <button class="v" @click="$router.push('/admin/quizes')">Назад</button>
-            <button class="g" v-if="changed" @click="update()">Обновить</button>
+    <AdminPageWrapper v-if="quiz" class="quiz-config-page">
+        <div class="back-btn">
+            <button class="v small" @click="$router.push('/admin/quizes')">Назад</button>
         </div>
         <div class="quiz-config">
+            <div class="quiz-manage-btn">
+                <div class="delete-btn">
+                    <button class="r small" @click="sureDelete = true" v-if="!sureDelete">Удалить</button>
+                    <button class="r small" @click="deleteFunc()" v-else>Да, хочу удалить</button>
+                </div>
+                <button class="g small" v-if="changed" @click="update()">Обновить</button>
+            </div>
             <div class="quiz-field">
                 <p>ID</p>
                 <p>{{ quiz.id }}</p>
@@ -48,11 +54,24 @@
                         @change="(event) => { newLogo = event.target.files[0]; changed = true }" />
                 </div>
             </div>
+        
+        <div class="devider"></div>
+        <div class="add-question">
+            <button class="v small" @click="isAddingQuestion=true">Создать вопрос</button>
             <div>
-                <button class="r" @click="sureDelete=true" v-if="!sureDelete">Удалить</button>
-                <button class="r" @click="delete_()" v-else>Да, хочу удалить</button>
+                
             </div>
         </div>
+        
+        <div class="question-list">
+            <p>{{ questions }}</p>
+            <div class="question-row" v-for="question in questions" :key="question.id">
+                <p>{{ question.header }}</p>
+                <p>{{ question.note }}</p>
+                <p>{{ question.points }}</p>
+            </div>
+        </div>
+    </div>
     </AdminPageWrapper>
 </template>
 <script>
@@ -70,7 +89,7 @@ export default {
     components: { AdminPageWrapper },
     data() {
         return {
-            deleteQuiz, 
+            deleteQuiz,
             quiz: null,
             questions: null,
 
@@ -79,6 +98,8 @@ export default {
             changed: false,
 
             sureDelete: false,
+
+            isAddingQuestion: false,
         }
     },
     methods: {
@@ -86,7 +107,7 @@ export default {
             await updateQuiz(this.quiz, this.newLogo)
             location.reload()
         },
-        async delete_() {
+        async deleteFunc() {
             await deleteQuiz(this.quizId)
             this.$router.push("/admin/quizes")
         },
@@ -107,14 +128,22 @@ export default {
 }
 </script>
 <style scoped>
-.top {
-    display: flex;
-    justify-content: space-between;
-    min-width: 500px;
-    max-width: 1000px;
+.back-btn {
     margin-bottom: 40px;
 }
-.top > button{
+
+.quiz-manage-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.right-top-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.top>button {
     width: 300px;
 }
 
@@ -123,34 +152,30 @@ export default {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    min-width: 500px;
-    max-width: 1000px;
 }
 
 .quiz-field> :last-child {
     width: auto;
 }
 
-.quiz-config {
+.quiz-config-page {
+    min-width: 500px;
+    max-width: 1000px;
+}
+.quiz-config{
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
+
 textarea {
     height: 400px;
     width: 600px !important;
 }
-input[type=text]{
+
+input[type=text] {
     width: 600px !important;
-}
-
-.back-btn {
-    margin-bottom: 40px;
-}
-
-.back-btn>button {
-    width: 200px;
 }
 
 img {
@@ -167,7 +192,21 @@ img {
 .quiz-logo>input {
     width: 150px
 }
-button.r{
+
+button.r {
     background-color: red;
+}
+
+.delete-btn>button {
+    width: 200px;
+}
+
+.question-list>button {
+    width: 200px;
+}
+.devider{
+    width: 100%;
+    height: 1px;
+    background-color: white;
 }
 </style>

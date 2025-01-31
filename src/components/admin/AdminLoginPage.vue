@@ -7,7 +7,7 @@
     </AdminPageWrapper>
 </template>
 <script>
-import { tryAuth } from '@/api/admin/client';
+import { login } from '@/api/admin/client';
 import AdminPageWrapper from './_Wrapper.vue';
 export default {
     data() {
@@ -19,7 +19,7 @@ export default {
     components: { AdminPageWrapper },
     methods: {
         async login() {
-            const success = await tryAuth(this.username, this.password)
+            const success = await login(this.username, this.password)
             if (success) {
                 this.$router.push("/admin/quizes")
                 return;

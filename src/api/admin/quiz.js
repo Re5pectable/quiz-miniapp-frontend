@@ -10,8 +10,13 @@ export async function getQuiz(id) {
   return data;
 }
 
-export async function createQuiz(data) {
-  await apiClient.post("quiz", data);
+export async function createQuiz(data, logo) {
+  const formData = new FormData();
+  formData.append("data", JSON.stringify(data));
+  if (logo) {
+    formData.append("logo_pic", logo);
+  }
+  await apiClient.post("quiz", formData);
 }
 
 export async function updateQuiz(data, newLogo) {
@@ -20,10 +25,9 @@ export async function updateQuiz(data, newLogo) {
   if (newLogo) {
     formData.append("logo_pic", newLogo);
   }
-
   await apiClient.put("quiz", formData);
 }
 
 export async function deleteQuiz(id) {
-  await apiClient.delete("quiz", {data: { id: id }});
+  await apiClient.delete("quiz", { data: { id: id } });
 }

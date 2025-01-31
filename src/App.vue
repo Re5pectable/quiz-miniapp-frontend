@@ -4,30 +4,8 @@
   </div>
 </template>
 <script>
-import { apiInitSession } from './api/session';
 export default {
   name: 'App',
-  data() {
-    return {
-      tg: null,
-    }
-  },
-  async mounted() {
-    this.tg = window?.Telegram?.WebApp;
-    await this.init();
-  },
-  methods: {
-    async init() {
-      if (this.tg) {
-        this.tg.setHeaderColor("#000000");
-        this.tg.setBackgroundColor("#000000");
-        this.tg.setBottomBarColor("#000000");
-      }
-      console.log(this.tg)
-      const userData = this.tg?.initDataUnsafe?.user
-      await apiInitSession({ userData });
-    }
-  },
 }
 </script>
 <style>
@@ -99,6 +77,10 @@ button.v {
 button.v:disabled {
   background-color: #353535;
   color: #797C84;
+}
+button.small{
+  padding: 10px 15px;
+  width: auto !important;
 }
 
 button.gr {

@@ -5,8 +5,13 @@ export async function getQuestions(quiz_id) {
     return data;
 }
 
-export async function createQuestion(data) {
-    await apiClient.post("quiz/questions", data);
+export async function createQuestion(data, logo) {
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    if (logo) {
+      formData.append("picture", logo);
+    }
+    await apiClient.post("quiz/questions", formData);
 }
 
 export async function updateQuestion(id, data) {

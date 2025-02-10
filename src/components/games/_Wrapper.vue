@@ -17,12 +17,12 @@ export default {
         async init() {
             const tg = window?.Telegram?.WebApp;
             if (tg) {
-                this.tg.setHeaderColor("#000000");
-                this.tg.setBackgroundColor("#000000");
-                this.tg.setBottomBarColor("#000000");
+                tg.setHeaderColor("#000000");
+                tg.setBackgroundColor("#000000");
+                tg.setBottomBarColor("#000000");
             }
             console.log(this.tg)
-            const userData = this.tg?.initDataUnsafe?.user
+            const userData = tg?.initDataUnsafe?.user
             await apiInitSession({ userData });
         }
     },

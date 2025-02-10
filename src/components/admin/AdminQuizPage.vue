@@ -61,27 +61,37 @@
         <h2>Результаты</h2>
         <div>
             <div class="add-question-btn">
-                <button class="v small" @click="isAddingResult = true">Создать вопрос</button>
+                <button class="v small" @click="isAddingResult = true">Создать результат</button>
                 <button class="gr small" v-if="isAddingResult" @click="isAddingResult = false">Закрыть</button>
             </div>
             <div v-if="isAddingResult" class="add-question-config">
                 <div class="quiz-field">
                     <p>Заголовок</p>
-                    <input v-model="newQuestion.header">
+                    <input v-model="newResult.header">
                 </div>
                 <div class="quiz-field">
                     <p>Текст</p>
-                    <input v-model="newQuestion.text">
+                    <textarea v-model="newResult.text"></textarea>
                 </div>
                 <div class="quiz-field">
-                    <p>Нужно очков</p>
-                    <input type="number" v-model.number="newQuestion.points">
+                    <p>Нужно очков, минимум</p>
+                    <input type="number" v-model.number="newResult.points[0]">
+                </div>
+                <div class="quiz-field">
+                    <p>Нужно очков, максимум</p>
+                    <input type="number" v-model.number="newResult.points[1]">
                 </div>
                 <div class="quiz-field">
                     <p>Обложка</p>
                     <input type="file" accept="image/png, image/jpeg, image/jpg"
                         @change="(event) => { newResultPic = event.target.files[0] }" />
                 </div>
+                <button class="g small" @click="createResult()">Создать</button>
+            </div>
+        </div>
+        <div class="result-list">
+            <div class="result-row" v-for="result in results" :key="result.id" @click="$router.push(`/admin/quizes/results/${result.id}`)">
+                <p>{{result.id}} "{{ result.header }}", баллы от {{ result.points[0] }} до {{ result.points[1] }}</p>
             </div>
         </div>
         <div class="devider"></div>
@@ -121,6 +131,7 @@
 import { apiGetQuestions, apiCreateQuestion } from '@/api/admin/questions';
 import { apiGetQuiz, apiUpdateQuiz, apiDeleteQuiz } from '@/api/admin/quiz'
 import AdminPageWrapper from './_Wrapper.vue';
+import { apiCreateResult, getResultList } from '@/api/admin/results';
 
 export default {
     props: {
@@ -134,7 +145,8 @@ export default {
         return {
             deleteQuiz: apiDeleteQuiz,
             quiz: null,
-            questions: null,
+            questions: [],
+            results: [],
 
             copiedData: null,
             newLogo: null,
@@ -148,7 +160,7 @@ export default {
             newQuestion: { quiz_id: this.quizId, order: 1 },
             newQuestionPic: null,
 
-            newResult: { quiz_id: this.quizId},
+            newResult: { quiz_id: this.quizId, points: [null, null]},
             newResultPic: null,
         }
     },
@@ -168,13 +180,21 @@ export default {
             } catch (error) {
                 alert(error.response.data.detail[0].msg)
             }
-            
+        },
+        async createResult() {
+            try {
+                await apiCreateResult(this.newResult, this.newResultPic)
+                location.reload()    
+            } catch (error) {
+                alert(error.response.data.detail[0].msg)
+            }
         },
     },
     async mounted() {
         this.quiz = await apiGetQuiz(this.quizId)
         this.copiedData = { ...this.quiz }
         this.questions = await apiGetQuestions(this.quizId)
+        this.results = await getResultList(this.quizId)
     },
     watch: {
         quiz: {
@@ -318,5 +338,20 @@ button.r {
 
 .question-row:hover{
     background-color: gray;
+}
+.result-list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.result-row{
+    border: 1px solid white;
+    padding: 15px;
+    border-radius: 15px;
+}
+.result-row:hover{
+    background-color: grey;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 </style>

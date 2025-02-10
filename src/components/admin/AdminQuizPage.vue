@@ -18,6 +18,14 @@
                 <p>{{ quiz.id }}</p>
             </div>
             <div class="quiz-field">
+                <p>Опубликован</p>
+                <select v-model="quiz.is_active">
+                    <option :value="true">Да</option>
+                    <option :value="false">Нет</option>
+                </select>
+            </div>
+            <div class="devider"></div>
+            <div class="quiz-field">
                 <p>Заголовок</p>
                 <input type="text" v-model="quiz.header">
             </div>
@@ -39,13 +47,6 @@
                     <option value="Кино">Кино</option>
                     <option value="Литература">Литература</option>
                     <option value="Музыка">Музыка</option>
-                </select>
-            </div>
-            <div class="quiz-field">
-                <p>Виден другим</p>
-                <select v-model="quiz.is_active">
-                    <option :value="true">Да</option>
-                    <option :value="false">Нет</option>
                 </select>
             </div>
             <div class="quiz-field">
@@ -91,7 +92,7 @@
         </div>
         <div class="result-list">
             <div class="result-row" v-for="result in results" :key="result.id" @click="$router.push(`/admin/quizes/results/${result.id}`)">
-                <p>{{result.id}} "{{ result.header }}", баллы от {{ result.points[0] }} до {{ result.points[1] }}</p>
+                <p>"{{ result.header }}", баллы от {{ result.points[0] }} до {{ result.points[1] }}</p>
             </div>
         </div>
         <div class="devider"></div>

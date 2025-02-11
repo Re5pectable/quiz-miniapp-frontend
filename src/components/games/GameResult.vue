@@ -28,18 +28,6 @@ import QuestionLoader from './_Loader.vue';
 import WrapperComponent from './_Wrapper.vue';
 
 export default {
-    metaInfo() {
-        return {
-            title: 'Название страницы',
-            meta: [
-                { property: 'og:title', content: this.gameInfo?.quiz?.header },
-                { property: 'og:description', content: 'Описание страницы' },
-                { property: 'og:image', content: 'https://example.com/your-image.jpg' },
-                { property: 'og:url', content: window.location.href },
-                { property: 'og:type', content: 'website' },
-            ],
-        }
-    },
     components: { HeaderComponent, QuestionLoader, WrapperComponent },
     props: {
         gameId: {
@@ -66,9 +54,9 @@ export default {
     methods: {
         async share() {
             const shareData = {
-                title: `Тест "${this.gameInfo.quiz.header}"`,
-                text: `Я прошел тест "${this.gameInfo.quiz.header}" и тебе советую!\n\nЛови ссылку: https://quiz.kley.media/quiz/${this.gameInfo.quiz.id}`,
-                // url: `https://quiz.kley.media/quiz/${this.gameInfo.quiz.id}`,
+                title: `Пройти тест "${this.gameInfo.quiz.header}"`,
+                text: `Я ${this.result?.header}! А ты?\n\nhttps://quiz.kley.media/share/${this.gameId}`,
+                url: `https://quiz.kley.media/share/${this.gameId}`,
             };
             await navigator.share(shareData);
         }

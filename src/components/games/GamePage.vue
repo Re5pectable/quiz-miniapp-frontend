@@ -1,6 +1,6 @@
 <template>
     <WrapperComponent>
-        <HeaderComponent :total="gameInfo.quiz.n_questions" :current="order" />
+        <HeaderComponent :total="total" :current="order" />
         <QuestionLoader v-if="!question"/>
         <div class="question-container pad" v-else>
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
@@ -53,6 +53,7 @@ export default {
             selectedAnswerId: null,
             answered: null,
             order: null,
+            total: null,
 
             requesting: null,
         }
@@ -64,6 +65,7 @@ export default {
             return
         }
         await this.next()
+        this.total = this.gameInfo.quiz.n_questions
     },
     methods: {
         choose(answerId) {

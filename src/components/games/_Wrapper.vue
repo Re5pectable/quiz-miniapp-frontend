@@ -8,8 +8,6 @@
 <script>
 import { apiInitSession } from '@/api/session';
 export default {
-    data() {
-    },
     async mounted() {
         await this.init();
     },

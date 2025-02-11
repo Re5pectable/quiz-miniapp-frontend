@@ -23,7 +23,7 @@ export default {
             }
             console.log('TG Data: ', tg)
             const userData = tg?.initDataUnsafe?.user
-            await apiInitSession({ userData });
+            await apiInitSession(userData );
         }
     },
 }

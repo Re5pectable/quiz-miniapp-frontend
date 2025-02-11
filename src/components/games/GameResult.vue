@@ -47,16 +47,13 @@ export default {
             return
         }
         this.result = await apiGetResult(this.gameId)
-        this.$nextTick(() => {
-            this.$meta().refresh();
-        });
     },
     methods: {
         async share() {
             const shareData = {
                 title: `Пройти тест "${this.gameInfo.quiz.header}"`,
-                text: `Я ${this.result?.header}! А ты?\n\nhttps://quiz.kley.media/share/${this.gameId}`,
-                url: `https://quiz.kley.media/share/${this.gameId}`,
+                text: `Я ${this.result?.header}! А ты?\n\nhttps://quiz.kley.media/share/${this.result.invitation_id}`,
+                url: `https://quiz.kley.media/share/${this.result.invitation_id}`,
             };
             await navigator.share(shareData);
         }

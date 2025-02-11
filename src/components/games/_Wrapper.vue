@@ -21,7 +21,7 @@ export default {
                 tg.setBackgroundColor("#000000");
                 tg.setBottomBarColor("#000000");
             }
-            console.log(this.tg)
+            console.log(tg)
             const userData = tg?.initDataUnsafe?.user
             await apiInitSession({ userData });
         }

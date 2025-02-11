@@ -29,6 +29,13 @@ export default {
         };
     },
     async mounted() {
+        const startQuizPage = window?.Telegram?.WebApp?.initDataUnsafe?.start_param
+        console.log("Start param:", startQuizPage)
+        if (startQuizPage) {
+            this.$router.push(`/quiz/${startQuizPage}`);
+            return;
+        }
+        
         this.quizList = await apiGetQuizList();
     },
 };

@@ -22,13 +22,6 @@ export default {
             console.log('TG Data: ', tg)
             const userData = tg?.initDataUnsafe?.user
             await apiInitSession(userData);
-
-            const startQuizPage = tg?.initDataUnsafe?.start_param
-            console.log("Start param:", startQuizPage)
-            if (startQuizPage) {
-                this.$router.push(`/quiz/${startQuizPage}`);
-                return;
-            }
         }
     },
 }

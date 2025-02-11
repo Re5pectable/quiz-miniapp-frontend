@@ -26,6 +26,7 @@ export default {
             await apiInitSession(userData);
 
             const startQuizPage = tg?.initDataUnsafe?.start_param
+            console.log("Start param:", startQuizPage)
             if (startQuizPage) {
                 this.$router.push(`/quiz/${startQuizPage}`);
                 return;

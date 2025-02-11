@@ -23,7 +23,13 @@ export default {
             }
             console.log('TG Data: ', tg)
             const userData = tg?.initDataUnsafe?.user
-            await apiInitSession(userData );
+            await apiInitSession(userData);
+
+            const startQuizPage = tg?.initDataUnsafe?.start_param
+            if (startQuizPage) {
+                this.$router.push(`/quiz/${startQuizPage}`);
+                return;
+            }
         }
     },
 }

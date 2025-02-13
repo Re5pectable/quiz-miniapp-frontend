@@ -51,7 +51,8 @@ p {
   line-height: 130%;
 }
 p > a{
-  text-decoration: underline;
+  text-decoration: none;
+  text-underline-offset: 2px;
   color: #FFFFFF
 }
 

@@ -29,6 +29,10 @@
                 <p>Номер</p>
                 <input type="number" v-model.number="answer.order">
             </div>
+            <div class="quiz-field">
+                <p>Дается балллов</p>
+                <input type="number" v-model.number="answer.points">
+            </div>
         </div>
     </AdminPageWrapper>
 </template>
@@ -109,7 +113,7 @@ export default {
 }
 
 .quiz-field> :last-child {
-    width: auto;
+    width: 500px;
 }
 
 .quiz-config-page {

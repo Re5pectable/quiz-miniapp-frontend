@@ -167,7 +167,7 @@ export default {
 }
 
 .quiz-field> :last-child {
-    width: auto;
+    width: 500px;
 }
 
 .add-question-config {

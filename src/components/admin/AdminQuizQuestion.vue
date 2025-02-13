@@ -166,7 +166,7 @@ h2{
 }
 
 .quiz-field> :last-child {
-    width: auto;
+    width: 500px;
 }
 
 .quiz-config-page {

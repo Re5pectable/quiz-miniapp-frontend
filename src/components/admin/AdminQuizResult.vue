@@ -25,6 +25,14 @@
                 <p>Пометка</p>
                 <textarea v-model="result.text"></textarea>
             </div>
+            <div class="quiz-field">
+                <p>Нужно очков, минимум</p>
+                <input type="number" v-model.number="result.points[0]">
+            </div>
+            <div class="quiz-field">
+                <p>Нужно очков, максимум</p>
+                <input type="number" v-model.number="result.points[1]">
+            </div>
         </div>
     </AdminPageWrapper>
 </template>
@@ -104,7 +112,7 @@ export default {
 }
 
 .quiz-field> :last-child {
-    width: auto;
+    width: 500px;
 }
 
 .quiz-config-page {
@@ -150,7 +158,8 @@ button.r {
 .delete-btn>button {
     width: 200px;
 }
-.question-list{
+
+.question-list {
     width: 100%;
     display: flex;
     gap: 15px;
@@ -169,7 +178,8 @@ button.r {
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.add-question-config{
+
+.add-question-config {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -177,10 +187,12 @@ button.r {
     border: 1px solid white;
     border-radius: 15px;
 }
-.add-question-config > button{
+
+.add-question-config>button {
     width: 150px !important;
 }
-.question-row{
+
+.question-row {
     width: 100%;
     display: flex;
     align-items: center;
@@ -190,15 +202,18 @@ button.r {
     box-sizing: border-box;
     cursor: pointer;
 }
-.question-row > :nth-child(1){
+
+.question-row> :nth-child(1) {
     width: 800px;
     margin-right: 20px;
 }
-.question-row > :nth-child(2){
+
+.question-row> :nth-child(2) {
     width: 50px;
     margin-right: 120px;
 }
-.question-row:hover{
+
+.question-row:hover {
     background-color: gray;
 }
 </style>

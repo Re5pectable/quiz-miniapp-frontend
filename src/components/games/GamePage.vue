@@ -1,7 +1,7 @@
 <template>
     <WrapperComponent>
         <HeaderComponent :total="total" :current="order" />
-        <QuestionLoader v-if="!question"/>
+        <QuestionLoader v-if="!question" />
         <div class="question-container pad" v-else>
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
             <h2>{{ question?.text }}</h2>
@@ -20,11 +20,12 @@
                         }">
                             {{ answer.text }}
                         </p>
-                        <p v-if="answer.note" class="answer-note"><pre>{{ answer.note }}</pre></p>
+                        <p v-if="answer.note" class="answer-note" v-html="enterToBR(answer.note)"></p>
                     </div>
                 </div>
             </div>
-            <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()" v-if="!answered">Ответить</button>
+            <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()"
+                v-if="!answered">Ответить</button>
             <button class="g" :disabled="!selectedAnswerId || requesting" @click="next()" v-else>Дальше</button>
         </div>
     </WrapperComponent>
@@ -34,6 +35,7 @@ import { apiGetGame, apiGameNext, apiMakeAnswer } from '@/api/game';
 import HeaderComponent from './_Header.vue';
 import QuestionLoader from './_Loader.vue';
 import WrapperComponent from './_Wrapper.vue';
+import { enterToBR } from '@/utils';
 
 export default {
     props: {
@@ -45,6 +47,8 @@ export default {
     components: { HeaderComponent, QuestionLoader, WrapperComponent },
     data() {
         return {
+            enterToBR,
+
             gameInfo: null,
 
             question: null,

@@ -10,3 +10,6 @@ export default function toSnakeCase(camelCase) {
     return camelCase.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 }
 
+export function enterToBR(val) {
+    return val.replace(/\n/g, '<br>');
+}

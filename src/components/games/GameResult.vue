@@ -8,7 +8,7 @@
                 <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
                 <h3>Вы {{ result?.header }}</h3>
                 <div class="result-text">
-                    <p><pre>{{ result?.text }}</pre></p>
+                    <p v-html="enterToBR(result?.text)"></p>
                 </div>
                 <div class="tools">
                     <button class="v" @click="share">Поделиться</button>
@@ -26,6 +26,7 @@ import HeaderComponent from './_Header.vue';
 import { apiGetGame, apiGetResult } from '@/api/game';
 import QuestionLoader from './_Loader.vue';
 import WrapperComponent from './_Wrapper.vue';
+import { enterToBR } from '@/utils';
 
 export default {
     components: { HeaderComponent, QuestionLoader, WrapperComponent },

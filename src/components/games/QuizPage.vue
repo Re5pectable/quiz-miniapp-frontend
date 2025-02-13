@@ -5,7 +5,7 @@
         <div class="pad">
             <TagList :quiz="quiz"/>
             <h1>{{ quiz?.header }}</h1>
-            <p><pre>{{ quiz?.text }}</pre></p>
+            <p v-html="enterToBR(quiz?.text)"></p>
             <button class="g" @click="startGame()">Начать</button>
         </div>
     </WrapperComponent>
@@ -17,6 +17,7 @@ import WrapperComponent from './_Wrapper.vue';
 import { apiGetQuiz } from '@/api/quiz';
 import { apiStartGame } from '@/api/game';
 import TagList from './_TagList.vue';
+import { enterToBR } from '@/utils';
 
 export default {
     props: {
@@ -28,6 +29,8 @@ export default {
     components: { HeaderComponent, TagList, WrapperComponent },
     data() {
         return {
+            enterToBR,
+
             quiz: null,
         }
     },

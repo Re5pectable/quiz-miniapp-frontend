@@ -5,7 +5,7 @@
         <div class="pad">
             <TagList :quiz="quiz"/>
             <h1>{{ quiz?.header }}</h1>
-            <p>{{ quiz?.text }}</p>
+            <p><pre>{{ quiz?.text }}</pre></p>
             <button class="g" @click="startGame()">Начать</button>
         </div>
     </WrapperComponent>

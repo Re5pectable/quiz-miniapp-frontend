@@ -8,7 +8,7 @@
                 <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
                 <h3>Вы {{ result?.header }}</h3>
                 <div class="result-text">
-                    <p>{{ result?.text }}</p>
+                    <p><pre>{{ result?.text }}</pre></p>
                 </div>
                 <div class="tools">
                     <button class="v" @click="share">Поделиться</button>

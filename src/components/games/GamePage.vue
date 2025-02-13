@@ -20,7 +20,7 @@
                         }">
                             {{ answer.text }}
                         </p>
-                        <p v-if="answer.note" class="answer-note">{{ answer.note }}</p>
+                        <p v-if="answer.note" class="answer-note"><pre>{{ answer.note }}</pre></p>
                     </div>
                 </div>
             </div>

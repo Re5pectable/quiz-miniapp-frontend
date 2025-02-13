@@ -11,7 +11,7 @@ export default {
 <style>
 body{
     background-color: #F6F6F6;
-    color: #000000;
+    color: #000000 !important;
 }
 .admin-page{
     padding: 0 20px;

@@ -169,7 +169,7 @@ button.r {
 .devider {
     width: 100%;
     height: 1px;
-    background-color: white;
+    background-color: black;
     margin: 30px 0;
 }
 

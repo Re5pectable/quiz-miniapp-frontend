@@ -48,7 +48,7 @@ export default {
 .quiz-logo {
     width: 100%;
     height: 240px;
-    background-color: red;
+    background-color: transparent;
     border-radius: 8px;
     object-fit: cover;
     margin-bottom: 16px;

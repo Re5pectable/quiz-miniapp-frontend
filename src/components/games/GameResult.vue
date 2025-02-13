@@ -11,7 +11,7 @@
                     <p v-html="enterToBR(result?.text)"></p>
                 </div>
                 <div class="tools">
-                    <button class="v" @click="share">Поделиться</button>
+                    <button class="v" @click="share">Поделиться результатом</button>
                     <div class="extra-tools">
                         <button class="gr" @click="$router.push('/')">Все тесты</button>
                         <button class="gr" @click="$router.push(`/quiz/${gameInfo.quiz.id}`)">Заново</button>

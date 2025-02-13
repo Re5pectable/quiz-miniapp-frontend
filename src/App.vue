@@ -50,6 +50,10 @@ p {
   text-align: left;
   line-height: 130%;
 }
+p > a{
+  text-decoration: underline;
+  color: #FFFFFF
+}
 
 button,
 input,

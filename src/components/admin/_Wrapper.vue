@@ -1,6 +1,6 @@
 <template>
     <div class="admin-page">
-        <slot class="admin-content-wrapper"></slot>
+        <slot></slot>
     </div>
 </template>
 <script>
@@ -8,13 +8,12 @@ export default {
     
 }
 </script>
-<style scoped>
-body{
-    color: black !important;
-    background-color: #F6F6F6;
-}
+<style>
 .admin-page{
     padding: 0 20px;
-    margin-top: 40px;   
+    margin-top: 40px;
+}
+.quiz-field{
+    color: black;
 }
 </style>

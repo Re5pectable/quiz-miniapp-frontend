@@ -48,7 +48,7 @@
                 </div>
                 <div class="quiz-field">
                     <p>Пометка</p>
-                    <input v-model="newAnswer.note">
+                    <textarea v-model="newAnswer.note"></textarea>
                 </div>
                 <div class="quiz-field">
                     <p>Порядок</p>

@@ -38,6 +38,8 @@ export default {
     },
     data() {
         return {
+            enterToBR,
+            
             gameInfo: null,
             result: null,
         }

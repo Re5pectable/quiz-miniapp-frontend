@@ -3,7 +3,7 @@
         <QuestionLoader v-if="!result" />
         <div v-else>
             <HeaderComponent :nonSolid="true" />
-            <img :src="result?.pic_url">
+            <img :src="result?.pic_url || gameInfo.quiz.logo_url">
             <div class="result pad">
                 <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
                 <h3>Вы {{ result?.header }}</h3>
@@ -39,7 +39,7 @@ export default {
     data() {
         return {
             enterToBR,
-            
+
             gameInfo: null,
             result: null,
         }
@@ -54,8 +54,8 @@ export default {
     methods: {
         async share() {
             const shareData = {
-                title: `Пройти тест "${this.gameInfo.quiz.header}"`,
-                text: `Я ${this.result?.header}! А ты?\n\nhttps://quiz.kley.media/share/${this.result.invitation_id}`,
+                // title: `Пройти тест "${this.gameInfo.quiz.header}"`,
+                text: `Я ${this.result?.header}! А ты?\nПройти тест: https://quiz.kley.media/share/${this.result.invitation_id}`,
                 url: `https://quiz.kley.media/share/${this.result.invitation_id}`,
             };
             await navigator.share(shareData);

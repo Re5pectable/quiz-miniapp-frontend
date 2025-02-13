@@ -70,7 +70,7 @@ export default {
     },
     async mounted() {
         this.result = await apiGetResultOne(this.resultId)
-        this.copiedData = { ...this.result }
+        this.copiedData = JSON.parse(JSON.stringify(this.result));
     },
     watch: {
         result: {

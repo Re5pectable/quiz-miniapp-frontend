@@ -1,6 +1,6 @@
 <template>
     <div class="header pad" :class="{'non-solid': nonSolid}">
-        <div v-if="!hideMore" class="more-btn" @click="$router.push('/')"></div>
+        <div v-if="!hideMore" class="more-btn" @click="$router.push({ name: 'home' })"></div>
         <img src="/img/Logo_Dark.png" class="logo">
         <span class="question-counter" v-if="current">{{ current }}/{{ total }}</span>
     </div>

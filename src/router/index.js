@@ -15,7 +15,7 @@ import AdminQuizResult from "@/components/admin/AdminQuizResult.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "", component: QuizList },
+  { path: "/", component: QuizList, name: 'home' },
   { path: "/quiz/:quizId", component: QuizPage, props: true },
   { path: "/game/:gameId/result", component: GameResult, props: true },
   { path: "/game/:gameId", component: GamePage, props: true },

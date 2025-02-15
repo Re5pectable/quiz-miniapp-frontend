@@ -166,7 +166,7 @@ img {
 }
 
 .correct {
-    color: #758BFD;
+    color: #AEB8FE;
 }
 
 .wrong {
@@ -206,7 +206,7 @@ img {
     content: '';
     width: 12px;
     height: 12px;
-    background-color: lavender;
+    background-color: #AEB8FE;
     border-radius: 50%;
 }
 

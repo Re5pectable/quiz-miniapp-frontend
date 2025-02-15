@@ -36,10 +36,9 @@ export default {
         this.quizList = await apiGetQuizList();
         alert("HUY")
         await sleep(5)
-        if (startQuizPage) {
-            this.$router.replace(`/quiz/${startQuizPage}`);
-            return;
-        }
+        // if (startQuizPage) {
+        //     this.$router.replace(`/quiz/${startQuizPage}`);
+        // }
     },
 };
 </script>

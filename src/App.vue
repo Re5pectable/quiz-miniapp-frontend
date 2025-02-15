@@ -19,7 +19,7 @@ h2,
 h3,
 h4 {
   font-size: 42px;
-  font-weight: 600;
+  font-weight: 600 !important;
   letter-spacing: -0.02em !important;
   text-align: left;
   color: white;

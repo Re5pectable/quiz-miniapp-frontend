@@ -1,7 +1,7 @@
 <template>
     <div class="header pad" :class="{'non-solid': nonSolid}">
         <div v-if="!hideMore" class="more-btn" @click="$router.push({ name: 'home' })"></div>
-        <img src="/img/Logo_Dark.png" class="logo">
+        <img @click="window.open(`https://t.me/kleymedia`, '_blank').focus();" src="/img/Logo_Dark.png" class="logo">
         <span class="question-counter" v-if="current">{{ current }}/{{ total }}</span>
         <span class="question-counter" v-else-if="total">{{ total }}</span>
     </div>
@@ -42,6 +42,7 @@ img {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
 }
 .more-btn{
     background-image: url("/public/img/more_dark.svg");

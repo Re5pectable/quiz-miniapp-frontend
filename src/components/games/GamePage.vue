@@ -170,7 +170,7 @@ img {
 }
 
 .wrong {
-    color: #F21423
+    color: #FF4E5A
 }
 
 .radio-container {

@@ -57,7 +57,7 @@ export default {
             const shareData = {
                 // title: `Пройти тест "${this.gameInfo.quiz.header}"`,
                 text: `Я ${this.result?.header}! А ты?\n\n${url}`,
-                url: `https://quiz.kley.media/share/${url}`,
+                url: url,
             };
             await navigator.share(shareData);
         }

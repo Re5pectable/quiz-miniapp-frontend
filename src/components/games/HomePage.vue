@@ -31,12 +31,11 @@ export default {
     async mounted() {
         const startQuizPage = window?.Telegram?.WebApp?.initDataUnsafe?.start_param
         console.log("Start param:", startQuizPage)
+        this.quizList = await apiGetQuizList();
         if (startQuizPage) {
             this.$router.replace(`/quiz/${startQuizPage}`);
             return;
         }
-        
-        this.quizList = await apiGetQuizList();
     },
 };
 </script>

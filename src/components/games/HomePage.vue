@@ -19,7 +19,6 @@ import WrapperComponent from './_Wrapper.vue';
 import HeaderComponent from './_Header.vue';
 import TagList from './_TagList.vue';
 import { apiGetQuizList } from '@/api/quiz';
-import { sleep } from '@/utils';
 
 
 export default {
@@ -34,10 +33,9 @@ export default {
         const startQuizPage = window?.Telegram?.WebApp?.initDataUnsafe?.start_param
         console.log("Start param:", startQuizPage)
         this.quizList = await apiGetQuizList();
-        alert("HUY")
-        await sleep(5)
         if (startQuizPage) {
             this.$router.replace(`/quiz/${startQuizPage}`);
+            window.Telegram.WebApp.initDataUnsafe.start_param = null;
         }
     },
 };

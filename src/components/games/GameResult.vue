@@ -83,7 +83,7 @@ img {
     object-fit: cover;
 }
 p{
-    text-align: left;
+    text-align: center;
 }
 .result {
     display: flex;

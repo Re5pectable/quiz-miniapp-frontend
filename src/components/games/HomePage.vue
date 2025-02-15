@@ -4,6 +4,7 @@
         <div class="quiz-list pad">
             <div v-for="quiz in quizList" class="quiz-wrapper" :key="quiz.id" @click="$router.push(`/quiz/${quiz.id}`)">
                 <img class="quiz-logo" :src="quiz.logo_url">
+                <h1>ТЕСТ</h1>
                 <div class="quiz-info">
                     <TagList :quiz="quiz" />
                     <h3>{{ quiz.header.toUpperCase() }}</h3>

@@ -1,6 +1,6 @@
 <template>
     <WrapperComponent v-if="quiz">
-        <HeaderComponent :nonSolid="true"/>
+        <HeaderComponent :nonSolid="true" :total="totalQuestions"/>
         <img :src="quiz?.logo_url" alt="Quiz Logo" />
         <div class="pad">
             <TagList :quiz="quiz"/>
@@ -32,6 +32,7 @@ export default {
             enterToBR,
 
             quiz: null,
+            totalQuestions: null,
         }
     },
     methods: {
@@ -41,7 +42,9 @@ export default {
         }
     },
     async mounted() {
-        this.quiz = await apiGetQuiz(this.quizId);
+        const data = await apiGetQuiz(this.quizId);
+        this.quiz = data.quiz;
+        this.totalQuestions = data.total_questions
     },
 }
 </script>

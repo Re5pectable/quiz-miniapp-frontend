@@ -14,8 +14,8 @@
                 <button class="g small" v-if="changed" @click="update()">Обновить</button>
             </div>
             <div class="quiz-field">
-                <a :href="`https://quiz.kley.media/quiz/${quiz.id}`">ID</a>
-                <p>{{ quiz.id }}</p>
+                <p>ID</p>
+                <p class="link" @click="gotoQuiz(quiz.id)">{{ quiz.id }}</p>
             </div>
             <div class="quiz-field">
                 <p>Опубликован</p>
@@ -166,6 +166,9 @@ export default {
         }
     },
     methods: {
+        gotoQuiz(id) {
+            window.open(`https://quiz.kley.media/quiz/${id}`, '_blank').focus();
+        },
         async update() {
             await apiUpdateQuiz(this.quiz, this.newLogo)
             location.reload()
@@ -242,7 +245,9 @@ h2{
 .quiz-field> :last-child {
     width: 500px;
 }
-
+.quiz-field > a{
+    color: white !important;
+}
 .quiz-config-page {
     min-width: 500px;
     max-width: 1000px;
@@ -354,5 +359,8 @@ button.r {
     background-color: grey;
     box-sizing: border-box;
     cursor: pointer;
+}
+p.link{
+    text-decoration: underline;
 }
 </style>

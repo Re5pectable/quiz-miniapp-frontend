@@ -6,7 +6,7 @@
                 <img class="quiz-logo" :src="quiz.logo_url">
                 <div class="quiz-info">
                     <TagList :quiz="quiz" />
-                    <h3>{{ quiz.header }}</h3>
+                    <h3>{{ quiz.header.toUpperCase() }}</h3>
                 </div>
             </div>
         </div>

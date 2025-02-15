@@ -4,7 +4,7 @@
         <img :src="quiz?.logo_url" alt="Quiz Logo" />
         <div class="pad">
             <TagList :quiz="quiz"/>
-            <h1>{{ quiz?.header }}</h1>
+            <h1>{{ quiz?.header.toUpperCase() }}</h1>
             <p v-html="enterToBR(quiz?.text)"></p>
             <button class="g" @click="startGame()">Начать</button>
         </div>

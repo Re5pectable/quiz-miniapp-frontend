@@ -14,7 +14,7 @@
                 <button class="g small" v-if="changed" @click="update()">Обновить</button>
             </div>
             <div class="quiz-field">
-                <p>ID</p>
+                <a :href="`https://quiz.kley.media/quiz/${quiz.id}`">ID</a>
                 <p>{{ quiz.id }}</p>
             </div>
             <div class="quiz-field">

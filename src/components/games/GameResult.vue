@@ -6,7 +6,7 @@
             <img :src="result?.pic_url || gameInfo.quiz.logo_url">
             <div class="result pad">
                 <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
-                <h3>Вы {{ result?.header }}</h3>
+                <h3>Вы {{ result?.header.toUpperCase() }}</h3>
                 <div class="result-text">
                     <p v-html="enterToBR(result?.text)"></p>
                 </div>
@@ -53,10 +53,11 @@ export default {
     },
     methods: {
         async share() {
+            const url = `https://quiz.kley.media/share/${this.result.invitation_id}`
             const shareData = {
                 // title: `Пройти тест "${this.gameInfo.quiz.header}"`,
-                text: `Я ${this.result?.header}! А ты?\nПройти тест: https://quiz.kley.media/share/${this.result.invitation_id}`,
-                url: `https://quiz.kley.media/share/${this.result.invitation_id}`,
+                text: `Я ${this.result?.header}! А ты?\n\n${url}`,
+                url: `https://quiz.kley.media/share/${url}`,
             };
             await navigator.share(shareData);
         }

@@ -4,7 +4,7 @@
         <QuestionLoader v-if="!question" />
         <div class="question-container pad" v-else>
             <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
-            <h2>{{ question?.text }}</h2>
+            <h2>{{ question?.text.toUpperCase() }}</h2>
             <div class="answers-list">
                 <div class="answer-container" v-for="answer in answers" :key="answer.id">
                     <div class="radio-container">
@@ -206,12 +206,12 @@ img {
     content: '';
     width: 12px;
     height: 12px;
-    background-color: #758BFD;
+    background-color: lavender;
     border-radius: 50%;
 }
 
 .custom-radio.wrong:checked+label::after {
-    background-color: #F21423;
+    background-color: #FF4E5A;
 }
 
 .question-container {

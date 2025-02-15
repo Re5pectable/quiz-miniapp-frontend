@@ -44,7 +44,7 @@ export default {
     async mounted() {
         const data = await apiGetQuiz(this.quizId);
         this.quiz = data.quiz;
-        this.totalQuestions = data.total_questions
+        this.totalQuestions = data.questions_amount
     },
 }
 </script>

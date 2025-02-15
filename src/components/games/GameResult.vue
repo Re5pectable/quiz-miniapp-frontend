@@ -55,7 +55,6 @@ export default {
         async share() {
             const url = `https://quiz.kley.media/share/${this.result.invitation_id}`
             const shareData = {
-                // title: `Пройти тест "${this.gameInfo.quiz.header}"`,
                 text: `Я ${this.result?.header}! А ты?\n\n${url}`,
                 url: url,
             };
@@ -73,6 +72,7 @@ h1 {
 
 h3 {
     margin-bottom: 24px;
+    text-align: center;
 }
 
 img {

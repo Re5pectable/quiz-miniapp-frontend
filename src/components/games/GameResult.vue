@@ -56,7 +56,7 @@ export default {
             const url = `https://quiz.kley.media/share/${this.result.invitation_id}`
             const shareData = {
                 text: `Я ${this.result?.header}! А ты?\n\n${url}`,
-                url: url,
+                // url: url,
             };
             await navigator.share(shareData);
         }

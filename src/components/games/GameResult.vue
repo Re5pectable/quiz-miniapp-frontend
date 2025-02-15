@@ -6,7 +6,7 @@
             <img :src="result?.pic_url || gameInfo.quiz.logo_url">
             <div class="result pad">
                 <h1>{{ result?.copy?.points }}/{{ result?.copy?.total_questions }}</h1>
-                <h3>Вы {{ result?.header.toUpperCase() }}</h3>
+                <h3>ВЫ {{ result?.header.toUpperCase() }}</h3>
                 <div class="result-text">
                     <p v-html="enterToBR(result?.text)"></p>
                 </div>

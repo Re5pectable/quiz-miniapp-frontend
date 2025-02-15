@@ -195,7 +195,8 @@ export default {
         },
     },
     async mounted() {
-        this.quiz = await apiGetQuiz(this.quizId)
+        const data = await apiGetQuiz(this.quizId)
+        this.quiz = data.quiz
         this.copiedData = { ...this.quiz }
         this.questions = await apiGetQuestions(this.quizId)
         this.results = await getResultList(this.quizId)

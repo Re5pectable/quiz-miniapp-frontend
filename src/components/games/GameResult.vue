@@ -82,7 +82,9 @@ img {
     display: block;
     object-fit: cover;
 }
-
+p{
+    text-align: left;
+}
 .result {
     display: flex;
     align-items: center;

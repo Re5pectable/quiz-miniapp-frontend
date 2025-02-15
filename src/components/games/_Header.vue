@@ -3,6 +3,7 @@
         <div v-if="!hideMore" class="more-btn" @click="$router.push({ name: 'home' })"></div>
         <img src="/img/Logo_Dark.png" class="logo">
         <span class="question-counter" v-if="current">{{ current }}/{{ total }}</span>
+        <span class="question-counter" v-else-if="total">{{ total }}</span>
     </div>
 </template>
 <script>

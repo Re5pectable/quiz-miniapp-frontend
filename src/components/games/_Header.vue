@@ -1,7 +1,7 @@
 <template>
     <div class="header pad" :class="{'non-solid': nonSolid}">
         <div v-if="!hideMore" class="more-btn" @click="$router.push({ name: 'home' })"></div>
-        <img @click="window.open(`https://t.me/kleymedia`, '_blank').focus();" src="/img/Logo_Dark.png" class="logo">
+        <img @click="gotoChannel()" src="/img/Logo_Dark.png" class="logo">
         <span class="question-counter" v-if="current">{{ current }}/{{ total }}</span>
         <span class="question-counter" v-else-if="total">{{ total }}</span>
     </div>
@@ -23,6 +23,11 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    methods: {
+        gotoChannel() {
+            window.open(`https://t.me/kleymedia`, '_blank').focus();
+        }
     }
 }
 </script>

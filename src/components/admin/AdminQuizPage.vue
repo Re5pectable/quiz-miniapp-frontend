@@ -27,7 +27,7 @@
             <div class="devider"></div>
             <div class="quiz-field">
                 <p>Заголовок</p>
-                <input type="text" v-model="quiz.header">
+                <textarea v-model="quiz.header"></textarea>
             </div>
             <div class="quiz-field">
                 <p>Описание</p>

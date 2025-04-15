@@ -26,7 +26,7 @@
         <div v-if="isAddingQuiz" class="add-question-config">
             <div class="quiz-field">
                 <p>Заголовок</p>
-                <input v-model="newQuiz.header">
+                <textarea v-model="newQuiz.header"></textarea>
             </div>
             <div class="quiz-field">
                 <p>Описание</p>

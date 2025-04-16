@@ -3,46 +3,56 @@
         <HeaderComponent :total="total" :current="order" />
         <QuestionLoader v-if="!question" />
         <div class="question-container pad" v-else>
-            <img :src="question?.pic_url" alt="" v-if="question?.pic_url">
+            <img :src="question?.pic_url" alt="" v-if="question?.pic_url" />
             <h2>{{ question?.text.toUpperCase() }}</h2>
             <div class="answers-list">
                 <div class="answer-container" v-for="answer in answers" :key="answer.id">
                     <div class="radio-container">
-                        <input type="radio" :id="answer.id" name="answer" v-model="selectedAnswerId" :value="answer.id"
-                            :disabled="answered" class="custom-radio"
-                            :class="{ 'wrong': selectedAnswerId === answer.id && !answer.correct && answered }">
+                        <input
+                            type="radio"
+                            :id="answer.id"
+                            name="answer"
+                            v-model="selectedAnswerId"
+                            :value="answer.id"
+                            :disabled="answered"
+                            class="custom-radio"
+                            :class="{ wrong: selectedAnswerId === answer.id && !answer.correct && answered }"
+                        />
                         <label :for="answer.id"></label>
                     </div>
                     <div class="answer">
-                        <p @click="choose(answer.id)" :class="{
-                            'correct': answer.correct && answered,
-                            'wrong': selectedAnswerId === answer.id && !answer.correct && answered
-                        }">
-                            {{ answer.text }}
-                        </p>
+                        <p
+                            @click="choose(answer.id)"
+                            :class="{
+                                correct: answer.correct && answered,
+                                wrong: selectedAnswerId === answer.id && !answer.correct && answered,
+                            }"
+                            v-html="enterToBR(answer.text)"
+                        ></p>
                         <p v-if="answer.note" class="answer-note" v-html="enterToBR(answer.note)"></p>
                     </div>
                 </div>
             </div>
-            <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()"
-                v-if="!answered">Ответить</button>
+            <button class="v" :disabled="!selectedAnswerId || requesting" @click="makeAnswer()" v-if="!answered">
+                Ответить
+            </button>
             <button class="g" :disabled="!selectedAnswerId || requesting" @click="next()" v-else>Дальше</button>
         </div>
     </WrapperComponent>
 </template>
 <script>
-import { apiGetGame, apiGameNext, apiMakeAnswer } from '@/api/game';
-import HeaderComponent from './_Header.vue';
-import QuestionLoader from './_Loader.vue';
-import WrapperComponent from './_Wrapper.vue';
-import { enterToBR } from '@/utils';
+import { apiGetGame, apiGameNext, apiMakeAnswer } from "@/api/game";
+import HeaderComponent from "./_Header.vue";
+import QuestionLoader from "./_Loader.vue";
+import WrapperComponent from "./_Wrapper.vue";
+import { enterToBR } from "@/utils";
 
 export default {
     props: {
         gameId: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     components: { HeaderComponent, QuestionLoader, WrapperComponent },
     data() {
@@ -60,16 +70,16 @@ export default {
             total: null,
 
             requesting: null,
-        }
+        };
     },
     async mounted() {
-        this.gameInfo = await apiGetGame(this.gameId)
+        this.gameInfo = await apiGetGame(this.gameId);
         if (this.gameInfo.is_finished) {
-            this.$router.push(`/game/${this.gameId}/result`)
-            return
+            this.$router.push(`/game/${this.gameId}/result`);
+            return;
         }
-        await this.next()
-        this.total = this.gameInfo.quiz.n_questions
+        await this.next();
+        this.total = this.gameInfo.quiz.n_questions;
     },
     methods: {
         choose(answerId) {
@@ -86,22 +96,22 @@ export default {
             this.requesting = true;
             const data = await apiGameNext(this.gameId);
             if (data.is_finished) {
-                this.$router.push(`/game/${this.gameId}/result`)
-                return
+                this.$router.push(`/game/${this.gameId}/result`);
+                return;
             }
             this.requesting = false;
 
-            this.clear()
+            this.clear();
 
             this.question = data.question;
-            this.answers = data.answers
+            this.answers = data.answers;
             this.order = data.question.order;
         },
         async makeAnswer() {
             this.requesting = true;
             const data = await apiMakeAnswer(this.gameId, this.selectedAnswerId);
 
-            this.answers.forEach(answer => {
+            this.answers.forEach((answer) => {
                 if (answer.id === data.correct_id) {
                     answer.correct = true;
                 }
@@ -112,8 +122,8 @@ export default {
             this.answered = true;
             this.requesting = false;
         },
-    }
-}
+    },
+};
 </script>
 <style scoped>
 h2 {
@@ -152,25 +162,25 @@ img {
     width: 100%;
 }
 
-.answer> :first-child {
+.answer > :first-child {
     cursor: pointer;
 }
 
 .answer-note {
     margin-top: 16px;
     padding: 14px;
-    color: #D7DBEB;
+    color: #d7dbeb;
     background-color: #353535;
-    border: 1px solid #BABFD1;
+    border: 1px solid #babfd1;
     border-radius: 8px;
 }
 
 .correct {
-    color: #AEB8FE;
+    color: #aeb8fe;
 }
 
 .wrong {
-    color: #FF4E5A
+    color: #ff4e5a;
 }
 
 .radio-container {
@@ -185,7 +195,7 @@ img {
     position: absolute;
 }
 
-.custom-radio+label {
+.custom-radio + label {
     position: absolute;
     width: 24px;
     height: 24px;
@@ -198,20 +208,20 @@ img {
     justify-content: center;
 }
 
-.custom-radio:checked+label {
+.custom-radio:checked + label {
     background-color: #333;
 }
 
-.custom-radio:checked+label::after {
-    content: '';
+.custom-radio:checked + label::after {
+    content: "";
     width: 12px;
     height: 12px;
-    background-color: #AEB8FE;
+    background-color: #aeb8fe;
     border-radius: 50%;
 }
 
-.custom-radio.wrong:checked+label::after {
-    background-color: #FF4E5A;
+.custom-radio.wrong:checked + label::after {
+    background-color: #ff4e5a;
 }
 
 .question-container {

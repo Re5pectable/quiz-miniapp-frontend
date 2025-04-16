@@ -44,7 +44,7 @@
             <div v-if="isAddingAnswer" class="add-question-config">
                 <div class="quiz-field">
                     <p>Текст</p>
-                    <input v-model="newAnswer.text">
+                    <textarea v-model="newAnswer.text"></textarea>
                 </div>
                 <div class="quiz-field">
                     <p>Пометка</p>

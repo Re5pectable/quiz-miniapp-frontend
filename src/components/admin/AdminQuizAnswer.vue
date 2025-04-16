@@ -19,7 +19,7 @@
             </div>
             <div class="quiz-field">
                 <p>Текст</p>
-                <input type="text" v-model="answer.text">
+                <textarea v-model="answer.text"></textarea>
             </div>
             <div class="quiz-field">
                 <p>Пометка</p>

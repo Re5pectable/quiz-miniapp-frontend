@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: "StratosWeb";
   src: URL("/fonts/Stratos-Semibold.ttf") format("truetype");
 }
@@ -6,4 +6,15 @@
 @font-face {
   font-family: "CommonsPro";
   src: URL("/fonts/TT-Commons-Pro-Medium.ttf") format("truetype");
+} */
+
+@font-face {
+    font-family: "StratosWeb";
+    src: url("/fonts/Stratos-SemiBold.woff2") format("woff2"), url("/fonts/Stratos-SemiBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "CommonsPro";
+    src: url("/fonts/TT-Commons-Pro-Medium.woff2") format("woff2"),
+        url("/fonts/TT-Commons-Pro-Medium.woff") format("woff");
 }
